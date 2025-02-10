@@ -22,5 +22,33 @@ namespace Order_CRUD.Controllers
             await _customerService.AddCustomer(customerRequestDTO);
             return Ok(customerRequestDTO);
         }
+
+        [HttpGet("Get-Customer/{id}")]
+        public async Task<IActionResult> GetCustomer(int id)
+        {
+            var customer = await _customerService.GetCustomer(id);
+            return Ok(customer);
+        }
+
+        [HttpPut("Update-Customer/{id}")]
+        public async Task<IActionResult> UpdateCustomer(int id, CustomerRequestDTO customerRequestDTO)
+        {
+            try
+            {
+                var customer = await _customerService.UpdateCustomer(id, customerRequestDTO);
+                return Ok(customer);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("Delete-Customer/{id}")]
+        public async Task<IActionResult> DeleteCustomer(int id)
+        {
+            var customer = await _customerService.DeleteCustomer(id);
+            return Ok(customer);
+        }
     }
 }

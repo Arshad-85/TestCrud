@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Order_CRUD.DTOs.ReqestDTO;
 using Order_CRUD.IService;
 
 namespace Order_CRUD.Controllers
@@ -13,5 +14,19 @@ namespace Order_CRUD.Controllers
         {
             _orderService = orderService;
         }
+
+        [HttpPost("Add-Order")]
+        public async Task<IActionResult> AddOrder(OrderRequestDTO orderRequestDTO)
+        {
+            try
+            {
+                await _orderService.AddOrder(orderRequestDTO);
+                return Ok(orderRequestDTO);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }   
     }
 }

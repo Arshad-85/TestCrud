@@ -7,5 +7,8 @@ namespace Order_CRUD.IService
     public interface ICustomerService
     {
         Task<CustomerResponseDTO> AddCustomer(CustomerRequestDTO customerRequestDTO);
+        Task<CustomerResponseDTO> GetCustomer(int id);
+        Task<CustomerResponseDTO> UpdateCustomer(int id, CustomerRequestDTO customerRequestDTO);
+        Task<string> DeleteCustomer(int id);
     }
 }
