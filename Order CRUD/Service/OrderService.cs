@@ -32,48 +32,51 @@ namespace Order_CRUD.Service
             return orderResponseDTO;
         }
 
-        //public async Task<OrderResponseDTO> GetOrder(int id)
-        //{
-        //    var Order = await _OrderRepository.GetOrder(id);
-        //    var cusResponseDTO = new OrderResponseDTO();
-        //    cusResponseDTO.Name = Order.Name;
-        //    cusResponseDTO.Phone = Order.Phone;
-        //    cusResponseDTO.Address = Order.Address;
-        //    cusResponseDTO.Email = Order.Email;
-        //    return cusResponseDTO;
-        //}
+        public async Task<OrderResponseDTO> GetOrder(int id)
+        {
+            var Order = await _orderRepository.GetOrder(id);
+            var orderResponseDTO = new OrderResponseDTO();
+            orderResponseDTO.Id = Order.Id;
+            orderResponseDTO.CustomerId = Order.CustomerId;
+            orderResponseDTO.ProductId = Order.ProductId;
+            orderResponseDTO.Quantity = Order.Quantity;
+            orderResponseDTO.TotalPrice = Order.TotalPrice;
+            return orderResponseDTO;
+        }
 
-        //public async Task<OrderResponseDTO> UpdateOrder(int id, OrderRequestDTO OrderRequestDTO)
-        //{
-        //    var Order = await _orderService.GetOrder(id);
-        //    if (Order == null)
-        //    {
-        //        throw new Exception("Order Not Found");
-        //    }
+        public async Task<OrderResponseDTO> UpdateOrder(int id, OrderRequestDTO OrderRequestDTO)
+        {
+            var Order = await _orderRepository.GetOrder(id);
+            if (Order == null)
+            {
+                throw new Exception("Order Not Found");
+            }
 
-        //    Order.Name = OrderRequestDTO.Name;
-        //    Order.Email = OrderRequestDTO.Email;
-        //    Order.Phone = OrderRequestDTO.Phone;
-        //    Order.Address = OrderRequestDTO.Address;
+            Order.CustomerId = OrderRequestDTO.CustomerId;
+            Order.ProductId = OrderRequestDTO.ProductId;
+            Order.Quantity = OrderRequestDTO.Quantity;
+            Order.TotalPrice = OrderRequestDTO.TotalPrice;
 
-        //    var newcus = await _OrderRepository.UpdateOrder(Order);
-        //    var cusResponseDTO = new OrderResponseDTO();
-        //    cusResponseDTO.Name = newcus.Name;
-        //    cusResponseDTO.Phone = newcus.Phone;
-        //    cusResponseDTO.Address = newcus.Address;
-        //    cusResponseDTO.Email = newcus.Email;
-        //    return cusResponseDTO;
-        //}
+            var newcus = await _orderRepository.UpdateOrder(Order);
+            var cusResponseDTO = new OrderResponseDTO();
+            cusResponseDTO.CustomerId = newcus.CustomerId;
+            cusResponseDTO.ProductId = newcus.ProductId;
+            cusResponseDTO.Quantity = newcus.Quantity;
+            cusResponseDTO.TotalPrice = newcus.TotalPrice;
+            cusResponseDTO.OrderDate = newcus.OrderDate;
+            cusResponseDTO.Status = newcus.Status;
+            return cusResponseDTO;
+        }
 
-        //public async Task<string> DeleteOrder(int id)
-        //{
-        //    var Order = await _OrderRepository.GetOrder(id);
-        //    if (Order == null)
-        //    {
-        //        throw new Exception("Order Not Found");
-        //    }
-        //    var result = await _OrderRepository.DeleteOrder(Order);
-        //    return result;
-        //}
+        public async Task<string> DeleteOrder(int id)
+        {
+            var Order = await _orderRepository.GetOrder(id);
+            if (Order == null)
+            {
+                throw new Exception("Order Not Found");
+            }
+            var result = await _orderRepository.DeleteOrder(Order);
+            return result;
+        }
     }
 }

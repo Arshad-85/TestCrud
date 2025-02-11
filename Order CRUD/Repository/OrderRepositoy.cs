@@ -18,22 +18,22 @@ namespace Order_CRUD.Repository
             return addorder.Entity;
         }
 
-        public async Task<Order> Getorder(int id)
+        public async Task<Order> GetOrder(int id)
         {
             var getorder = await _orderDBContext.Orders.FindAsync(id);
             return getorder;
         }
 
-        public async Task<Order> Updateorder(Order customer)
+        public async Task<Order> UpdateOrder(Order order)
         {
-            var updateorder = _orderDBContext.Orders.Update(customer);
+            var updateorder = _orderDBContext.Orders.Update(order);
             await _orderDBContext.SaveChangesAsync();
             return updateorder.Entity;
         }
 
-        public async Task<string> Deleteorder(Order customer)
+        public async Task<string> DeleteOrder(Order order)
         {
-            _orderDBContext.Orders.Remove(customer);
+            _orderDBContext.Orders.Remove(order);
             await _orderDBContext.SaveChangesAsync();
             return "Successfully Deleted";
         }

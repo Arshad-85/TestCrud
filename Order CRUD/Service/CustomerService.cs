@@ -36,6 +36,7 @@ namespace Order_CRUD.Service
         {
             var customer = await _customerRepository.GetCustomer(id);
             var cusResponseDTO = new CustomerResponseDTO();
+            cusResponseDTO.Id = customer.Id;
             cusResponseDTO.Name = customer.Name;
             cusResponseDTO.Phone = customer.Phone;
             cusResponseDTO.Address = customer.Address;
@@ -58,6 +59,7 @@ namespace Order_CRUD.Service
 
             var newcus = await _customerRepository.UpdateCustomer(customer);
             var cusResponseDTO = new CustomerResponseDTO();
+            cusResponseDTO.Id = newcus.Id;
             cusResponseDTO.Name = newcus.Name;
             cusResponseDTO.Phone = newcus.Phone;
             cusResponseDTO.Address = newcus.Address;

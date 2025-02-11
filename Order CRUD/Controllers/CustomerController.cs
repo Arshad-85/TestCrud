@@ -47,8 +47,16 @@ namespace Order_CRUD.Controllers
         [HttpDelete("Delete-Customer/{id}")]
         public async Task<IActionResult> DeleteCustomer(int id)
         {
-            var customer = await _customerService.DeleteCustomer(id);
-            return Ok(customer);
+            try
+            {
+                var customer = await _customerService.DeleteCustomer(id);
+                return Ok(customer);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+           
         }
     }
 }
