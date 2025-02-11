@@ -43,5 +43,18 @@ namespace Order_CRUD.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpDelete("Delete-Product/{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            try
+            {
+                var delProduct = await _productService.DeleteProduct(id);
+                return Ok(delProduct);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

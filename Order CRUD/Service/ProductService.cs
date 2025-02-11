@@ -50,26 +50,36 @@ namespace Order_CRUD.Service
             return productResponseDTO;
         }
 
-        //public async Task<ProductResponseDTO> UpdateProduct(int id, ProductRequestDTO productRequestDTO)
-        //{
-        //    var product = new ProductRequestDTO();
-        //    if (product == null)
-        //    {
-        //        throw new Exception("Customer Not Found");
-        //    }
+        public async Task<ProductResponseDTO> UpdateProduct(int id, ProductRequestDTO productRequestDTO)
+        {
+            var product = await _productRepository.GetProduct(id);
+            if (product == null)
+            {
+                throw new Exception("Customer Not Found");
+            }
 
-        //    product.Name = productRequestDTO.Name;
-        //    product.Price = productRequestDTO.Price;
-        //    product.Description = productRequestDTO.Description;
-        //    product.Category = productRequestDTO.Category;
+            product.Name = productRequestDTO.Name;
+            product.Price = productRequestDTO.Price;
+            product.Description = productRequestDTO.Description;
+            product.Category = productRequestDTO.Category;
 
-        //    var newcus = await _productRepository.UpdateProduct(product);
-        //    var productResponseDTO = new CustomerResponseDTO();
-        //    productResponseDTO.Name = newcus.Name;
-        //    productResponseDTO.Phone = newcus.Phone;
-        //    productResponseDTO.Address = newcus.Address;
-        //    productResponseDTO.Email = newcus.Email;
-        //    return newcus;
-        //}
+            var newcus = await _productRepository.UpdateProduct(product);
+            var productResponseDTO = new ProductResponseDTO();
+            productResponseDTO.Name = newcus.Name;
+            productResponseDTO.Price = newcus.Price;
+            productResponseDTO.Description = newcus.Description;
+            productResponseDTO.Category = newcus.Category;
+            return productResponseDTO;
+        }
+        public async Task<string> DeleteProduct(int id)
+        {
+            var delProduct = await _productRepository.GetProduct(id);
+            if (delProduct == null)
+            {
+                throw new Exception("Product Not Found");
+            }
+            var result = await _productRepository.DeleteProduct(delProduct);
+            return result;
+        }
     }
 }

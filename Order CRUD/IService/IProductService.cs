@@ -8,5 +8,6 @@ namespace Order_CRUD.IService
         Task<ProductResponseDTO> AddProduct(ProductRequestDTO productRequestDTO);
         Task<ProductResponseDTO> GetProduct(int id);
         Task<ProductResponseDTO> UpdateProduct(int id, ProductRequestDTO productRequestDTO);
+        Task<string> DeleteProduct(int id);
     }
 }

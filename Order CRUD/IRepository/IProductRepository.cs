@@ -7,5 +7,6 @@ namespace Order_CRUD.IRepository
         Task<Product> AddProduct(Product product);
         Task<Product> GetProduct(int id);
         Task<Product> UpdateProduct(Product product);
+        Task<string> DeleteProduct(Product product);
     }
 }

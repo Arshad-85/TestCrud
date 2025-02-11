@@ -27,5 +27,11 @@ namespace Order_CRUD.Repository
             await _orderDBContext.SaveChangesAsync();
             return updateProduct.Entity;
         }
+        public async Task<string> DeleteProduct(Product product)
+        {
+            _orderDBContext.Products.Remove(product);
+            await _orderDBContext.SaveChangesAsync();
+            return "Successfully Deleted";
+        }
     }
 }
