@@ -16,5 +16,16 @@ namespace Order_CRUD.Repository
             await _orderDBContext.SaveChangesAsync();
             return cus.Entity;
         }
+        public async Task<Product> GetProduct(int id)
+        {
+            var getProduct = await _orderDBContext.Products.FindAsync(id);
+            return getProduct;
+        }
+        public async Task<Product> UpdateProduct(Product product)
+        {
+            var updateProduct = _orderDBContext.Products.Update(product);
+            await _orderDBContext.SaveChangesAsync();
+            return updateProduct.Entity;
+        }
     }
 }

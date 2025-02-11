@@ -36,5 +36,40 @@ namespace Order_CRUD.Service
             productResponseDTO.CreatedAt = newProduct.CreatedAt;
             return productResponseDTO;
         }
+
+        public async Task<ProductResponseDTO> GetProduct(int id)
+        {
+            var product = await _productRepository.GetProduct(id);
+            var productResponseDTO = new ProductResponseDTO();
+            productResponseDTO.Id = product.Id;
+            productResponseDTO.Name = product.Name;
+            productResponseDTO.Price = product.Price;
+            productResponseDTO.Description = product.Description;
+            productResponseDTO.Category = product.Category;
+            productResponseDTO.CreatedAt = product.CreatedAt;
+            return productResponseDTO;
+        }
+
+        //public async Task<ProductResponseDTO> UpdateProduct(int id, ProductRequestDTO productRequestDTO)
+        //{
+        //    var product = new ProductRequestDTO();
+        //    if (product == null)
+        //    {
+        //        throw new Exception("Customer Not Found");
+        //    }
+
+        //    product.Name = productRequestDTO.Name;
+        //    product.Price = productRequestDTO.Price;
+        //    product.Description = productRequestDTO.Description;
+        //    product.Category = productRequestDTO.Category;
+
+        //    var newcus = await _productRepository.UpdateProduct(product);
+        //    var productResponseDTO = new CustomerResponseDTO();
+        //    productResponseDTO.Name = newcus.Name;
+        //    productResponseDTO.Phone = newcus.Phone;
+        //    productResponseDTO.Address = newcus.Address;
+        //    productResponseDTO.Email = newcus.Email;
+        //    return newcus;
+        //}
     }
 }

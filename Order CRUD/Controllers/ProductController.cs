@@ -22,5 +22,26 @@ namespace Order_CRUD.Controllers
             var data = await _productService.AddProduct(productRequestDTO);
             return Ok(data);
         }
+
+        [HttpGet("Get-Product/{id}")]
+        public async Task<IActionResult> GetProduct(int id)
+        {
+            var data = await _productService.GetProduct(id);
+            return Ok(data);
+        }
+
+        [HttpPut("Update-Product/{id}")]
+        public async Task<IActionResult> UpdateProduct(int id, ProductRequestDTO productRequestDTO)
+        {
+            try
+            {
+                var productData = await _productService.UpdateProduct(id, productRequestDTO);
+                return Ok(productData);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
